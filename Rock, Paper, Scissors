@@ -1,0 +1,70 @@
+import random
+
+def get_user_choice():
+    print("\nChoose rock, paper, or scissors:")
+    print("1. Rock")
+    print("2. Paper")
+    print("3. Scissors")
+    user_choice = input("Enter your choice (1/2/3): ")
+    while user_choice not in ['1', '2', '3']:
+        print("Invalid choice. Please enter 1, 2, or 3.")
+        user_choice = input("Enter your choice (1/2/3): ")
+    return int(user_choice)
+
+def get_computer_choice():
+    choices = ['rock', 'paper', 'scissors']
+    return random.choice(choices)
+
+def determine_winner(user_choice, computer_choice):
+    if user_choice == 1:  
+        if computer_choice == 'rock':
+            return 'Tie'
+        elif computer_choice == 'paper':
+            return 'Computer'
+        else:
+            return 'User'
+    elif user_choice == 2:  
+        if computer_choice == 'rock':
+            return 'User'
+        elif computer_choice == 'paper':
+            return 'Tie'
+        else:
+            return 'Computer'
+    else:  
+        if computer_choice == 'rock':
+            return 'Computer'
+        elif computer_choice == 'paper':
+            return 'User'
+        else:
+            return 'Tie'
+
+def play_game():
+    user_choice = get_user_choice()
+    computer_choice = get_computer_choice()
+    winner = determine_winner(user_choice, computer_choice)
+    print("\nYou chose:", ['rock', 'paper', 'scissors'][user_choice - 1])
+    print("Computer chose:", computer_choice)
+    print("Result:", winner)
+    return (winner == 'User')
+
+def play_again():
+    print("\nDo you want to play again? (yes/no): ")
+    return input().lower() == 'yes'
+
+
+def main():
+    user_score = 0
+    computer_score = 0
+    while True:
+        user_wins = play_game()
+        if user_wins:
+            user_score += 1
+        else:
+            computer_score += 1
+        print("User score:", user_score)
+        print("Computer score:", computer_score)
+        if not play_again():
+            break
+
+if __name__ == "__main__":
+    main()
